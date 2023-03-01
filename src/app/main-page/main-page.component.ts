@@ -7,6 +7,11 @@ import { Component } from '@angular/core';
 })
 export class MainPageComponent {
 
+onGenerateClick(){
+  this.displayGeneratedNumbers(this.generateNumbers(10))
+
+}
+
 generateNumbers(quantity:number):number[] {
   const nums:number[] = [];  
   for (let i:number= 0; i < quantity; i++) {
@@ -16,11 +21,18 @@ generateNumbers(quantity:number):number[] {
   return nums;
 }
 
+
+
 displayGeneratedNumbers(nums:number[]){
   console.log(nums);
+  let holder = document.getElementById("disp");
+  while (holder?.firstChild) {
+    holder.removeChild(holder.firstChild)
+  }
+  
   let titleHolder: HTMLElement = document.createElement("h2");
   let title: Text = document.createTextNode("A generált számok:");
-  let holder = document.getElementById("disp");
+  
   titleHolder.appendChild(title);
   holder?.appendChild(titleHolder);
   let numsinHTML: Text = document.createTextNode(nums.join(", "))
