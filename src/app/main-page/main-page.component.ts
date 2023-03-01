@@ -6,17 +6,19 @@ import { Component } from '@angular/core';
   styleUrls: ['./main-page.component.css']
 })
 export class MainPageComponent {
+  
   generatedNums: number[] = [];
 
-
   onGenerateClick() {
+    this.removeHTMLcontent(document.getElementById("dispPrimes"))
     this.generateNumbers(10)
     this.displayGeneratedNumbers(this.generatedNums);
     this.enableCheckBtn();
   }
 
   onCheckClick() {
-
+    this.displayPrimes(this.countPrimes());
+    this.disableCheckBtn()
   }
 
   generateNumbers(quantity: number): void {
@@ -45,16 +47,14 @@ export class MainPageComponent {
       primes: primNums,
       count: primNums?.length,
       dateTime: new Date,
-      found: primNums.length < 0 ? true : false
+      found: primNums.length > 0 ? true : false
     }
-
-
-
+    return obj;
   }
 
   displayGeneratedNumbers(nums: number[]) {
     console.log(nums);
-    let holder = document.getElementById("disp");
+    let holder = document.getElementById("dispGenNums");
     while (holder?.firstChild) {
       holder.removeChild(holder.firstChild)
     }
@@ -69,6 +69,25 @@ export class MainPageComponent {
     holder?.appendChild(numsinHTML);
   }
 
+  displayPrimes(primes: any) {
+    console.log(primes);
+    let holder = document.getElementById("dispPrimes");
+    while (holder?.firstChild) {
+      holder.removeChild(holder.firstChild)
+    }
+
+    let titleHolder: HTMLElement = document.createElement("h2");
+    let title: Text = document.createTextNode(`${primes.found ? "Találat!" : "Nincs találat!"}`);
+    titleHolder.appendChild(title);
+    holder?.appendChild(titleHolder);
+
+    if (primes.found) {
+      let numsinHTML: Text = document.createTextNode(primes.primes.join(", "))
+      holder?.appendChild(numsinHTML);
+    }
+  }
+
+
   enableCheckBtn() {
     const checkBtn = document.getElementById("checkBtn");
     checkBtn?.classList.remove("disabled");
@@ -79,5 +98,9 @@ export class MainPageComponent {
     checkBtn?.classList.add("disabled");
   }
 
-
+  removeHTMLcontent(holder: any) {
+    while (holder?.firstChild) {
+      holder.removeChild(holder.firstChild)
+    }
+  }
 }
