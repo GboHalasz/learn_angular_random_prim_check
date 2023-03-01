@@ -2,12 +2,15 @@
     <div class="row text-center my-3">
         <div class="col12">
             <button (click)="onGenerateClick()" type="button" class="btn btn-primary mx-3">Generál</button>
-            <button id="checkBtn" type="button" class="btn btn-primary mx-3 disabled">Ellenőriz</button>
+            <button id="checkBtn" (click)="onCheckClick()" type="button" class="btn btn-primary mx-3 disabled">Ellenőriz</button>
         </div>
     </div>
     <div class="row">
-        <div id="disp" class="col12">
-
+        <div id="dispGenNums" class="col12">
+        </div>
+    </div>
+    <div class="row">
+        <div id="dispPrimes" class="col12">
         </div>
     </div>
 </div>
