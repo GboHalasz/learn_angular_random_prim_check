@@ -6,19 +6,50 @@ import { Component } from '@angular/core';
   styleUrls: ['./main-page.component.css']
 })
 export class MainPageComponent {
+  generatedNums: number[] = [];
+
 
   onGenerateClick() {
-    this.displayGeneratedNumbers(this.generateNumbers(10));
+    this.generateNumbers(10)
+    this.displayGeneratedNumbers(this.generatedNums);
     this.enableCheckBtn();
   }
 
-  generateNumbers(quantity: number): number[] {
-    const nums: number[] = [];
+  onCheckClick() {
+
+  }
+
+  generateNumbers(quantity: number): void {
+    this.generatedNums = [];
     for (let i: number = 0; i < quantity; i++) {
       const randInt: number = Math.floor((Math.random() * 4997) + 4);
-      nums.push(randInt);
+      this.generatedNums.push(randInt);
     }
-    return nums;
+  }
+
+  countPrimes(): any {
+    const primNums: number[] = this.generatedNums.filter((num) => {
+      if (num <= 1) {
+        return false;
+      }
+
+      for (let i = 2; i <= Math.sqrt(num); i++) {
+        if (num % i === 0) {
+          return false;
+        }
+      }
+      return true;
+    })
+
+    const obj: any = {
+      primes: primNums,
+      count: primNums?.length,
+      dateTime: new Date,
+      found: primNums.length < 0 ? true : false
+    }
+
+
+
   }
 
   displayGeneratedNumbers(nums: number[]) {
