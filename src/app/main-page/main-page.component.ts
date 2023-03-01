@@ -15,12 +15,19 @@ generateNumbers(quantity:number):number[] {
   }
   return nums;
 }
-ngOnInit(){
-  console.log(this.generateNumbers(10));
+
+displayGeneratedNumbers(nums:number[]){
+  console.log(nums);
+  let titleHolder: HTMLElement = document.createElement("h2");
+  let title: Text = document.createTextNode("A generált számok:");
+  let holder = document.getElementById("disp");
+  titleHolder.appendChild(title);
+  holder?.appendChild(titleHolder);
+  let numsinHTML: Text = document.createTextNode(nums.join(", "))
+  
+  holder?.appendChild(numsinHTML);
+  
 }
-
-
-displayGeneratedNumbers(){}
 
 
 }
