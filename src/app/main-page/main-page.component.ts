@@ -45,9 +45,11 @@ export class MainPageComponent {
 
   generateNumbers(quantity: number): void {
     this.generatedNums = [];
-    for (let i: number = 0; i < quantity; i++) {
+    while (this.generatedNums.length < quantity) {
       const randInt: number = Math.floor((Math.random() * 17) + 4);
-      this.generatedNums.push(randInt);
+      if (!this.generatedNums.includes(randInt)) {
+        this.generatedNums.push(randInt);
+      }
     }
   }
 
@@ -70,7 +72,7 @@ export class MainPageComponent {
     return result;
   }
 
-  displayGeneratedNumbers(nums: number[]) {
+  private displayGeneratedNumbers(nums: number[]) {
     console.log(nums);
 
     let titleHolder: HTMLElement = document.createElement("h2");
@@ -84,7 +86,7 @@ export class MainPageComponent {
     this.genNumsHolder?.appendChild(numsinHTML);
   }
 
-  displayPrimes(primes: CountPrimes) {
+  private displayPrimes(primes: CountPrimes) {
     console.log(primes);
 
     let titleHolder: HTMLElement = document.createElement("h2");
@@ -104,12 +106,12 @@ export class MainPageComponent {
     checkBtn?.classList.remove("disabled");
   }
 
-  disableCheckBtn() {
+  private disableCheckBtn() {
     const checkBtn = document.getElementById("checkBtn")
     checkBtn?.classList.add("disabled");
   }
 
-  removeHTMLcontent(holder: any) {
+  private removeHTMLcontent(holder: any) {
     while (holder.firstChild) {
       holder.removeChild(holder.firstChild)
     }
