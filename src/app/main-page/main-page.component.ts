@@ -6,11 +6,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./main-page.component.css']
 })
 export class MainPageComponent {
-  
   generatedNums: number[] = [];
+  genNumsHolder: any;
+  primesHolder: any;
+
+  ngOnInit() {
+    this.primesHolder = document.getElementById("dispPrimes");
+    this.genNumsHolder = document.getElementById("dispGenNums");
+  }
 
   onGenerateClick() {
-    this.removeHTMLcontent(document.getElementById("dispPrimes"))
+    this.removeHTMLcontent(this.primesHolder)
+    this.removeHTMLcontent(this.genNumsHolder)
     this.generateNumbers(10)
     this.displayGeneratedNumbers(this.generatedNums);
     this.enableCheckBtn();
@@ -54,39 +61,32 @@ export class MainPageComponent {
 
   displayGeneratedNumbers(nums: number[]) {
     console.log(nums);
-    let holder = document.getElementById("dispGenNums");
-    while (holder?.firstChild) {
-      holder.removeChild(holder.firstChild)
-    }
-
+    
     let titleHolder: HTMLElement = document.createElement("h2");
     let title: Text = document.createTextNode("A generált számok:");
 
     titleHolder.appendChild(title);
-    holder?.appendChild(titleHolder);
+    
     let numsinHTML: Text = document.createTextNode(nums.join(", "))
 
-    holder?.appendChild(numsinHTML);
+    this.genNumsHolder?.appendChild(titleHolder);
+    this.genNumsHolder?.appendChild(numsinHTML);
   }
 
   displayPrimes(primes: any) {
-    console.log(primes);
-    let holder = document.getElementById("dispPrimes");
-    while (holder?.firstChild) {
-      holder.removeChild(holder.firstChild)
-    }
-
+    console.log(primes);    
+   
     let titleHolder: HTMLElement = document.createElement("h2");
     let title: Text = document.createTextNode(`${primes.found ? "Találat!" : "Nincs találat!"}`);
     titleHolder.appendChild(title);
-    holder?.appendChild(titleHolder);
+    
+    this.primesHolder.appendChild(titleHolder);
 
     if (primes.found) {
       let numsinHTML: Text = document.createTextNode(primes.primes.join(", "))
-      holder?.appendChild(numsinHTML);
+      this.primesHolder.appendChild(numsinHTML);
     }
   }
-
 
   private enableCheckBtn() {
     const checkBtn = document.getElementById("checkBtn");
@@ -99,7 +99,7 @@ export class MainPageComponent {
   }
 
   removeHTMLcontent(holder: any) {
-    while (holder?.firstChild) {
+    while (holder.firstChild) {
       holder.removeChild(holder.firstChild)
     }
   }
