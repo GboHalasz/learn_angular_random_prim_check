@@ -1,5 +1,20 @@
 import { Component } from '@angular/core';
 
+export class CountPrimes {
+  primes: number[];
+  count: number;
+  dateTime: any;
+  found: boolean;
+
+  constructor(primes: number[]) {
+    this.primes = primes;
+    this.count = primes.length;
+    this.dateTime = new Date;
+    this.found = primes.length > 0 ? true : false;
+  }
+}
+
+
 @Component({
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
@@ -50,36 +65,32 @@ export class MainPageComponent {
       return true;
     })
 
-    const obj: any = {
-      primes: primNums,
-      count: primNums?.length,
-      dateTime: new Date,
-      found: primNums.length > 0 ? true : false
-    }
-    return obj;
+    const result = new CountPrimes(primNums);
+
+    return result;
   }
 
   displayGeneratedNumbers(nums: number[]) {
     console.log(nums);
-    
+
     let titleHolder: HTMLElement = document.createElement("h2");
     let title: Text = document.createTextNode("A generált számok:");
 
     titleHolder.appendChild(title);
-    
+
     let numsinHTML: Text = document.createTextNode(nums.join(", "))
 
     this.genNumsHolder?.appendChild(titleHolder);
     this.genNumsHolder?.appendChild(numsinHTML);
   }
 
-  displayPrimes(primes: any) {
-    console.log(primes);    
-   
+  displayPrimes(primes: CountPrimes) {
+    console.log(primes);
+
     let titleHolder: HTMLElement = document.createElement("h2");
     let title: Text = document.createTextNode(`${primes.found ? "Találat!" : "Nincs találat!"}`);
     titleHolder.appendChild(title);
-    
+
     this.primesHolder.appendChild(titleHolder);
 
     if (primes.found) {
