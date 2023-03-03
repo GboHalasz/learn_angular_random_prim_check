@@ -24,7 +24,7 @@ export class MainPageComponent {
   generateNumbers(quantity: number): void {
     this.generatedNums = [];
     for (let i: number = 0; i < quantity; i++) {
-      const randInt: number = Math.floor((Math.random() * 4997) + 4);
+      const randInt: number = Math.floor((Math.random() * 17) + 4);
       this.generatedNums.push(randInt);
     }
   }
@@ -88,7 +88,7 @@ export class MainPageComponent {
   }
 
 
-  enableCheckBtn() {
+  private enableCheckBtn() {
     const checkBtn = document.getElementById("checkBtn");
     checkBtn?.classList.remove("disabled");
   }
