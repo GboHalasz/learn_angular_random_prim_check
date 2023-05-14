@@ -1,0 +1,31 @@
+Próba vizsgafeladat 1.
+
+Készítsen egy Angular alkalmazást
+
+-A főoldalon helyezzen el 2 gomb elemet (Generál, Ellenőriz)
+-A gombok alatt egy dobozt készítsen el a dinamikus tartalom megjelenítéséhez
+-Alapeseben a generál gomb aktiv és megnyomására egy 10 elemű tömböt generáljon egy függvény. A generált számok legyenek a 4-5000 közötti egészszám halmazban.
+Függvény: 
+	név: generateNumbers 
+	paraméter(ek): quantity (szám tipusu)
+	visszatérés: tömb tipusu elem a quantity mennyiségü különböző egésszámok
+- A generált tömb számait írja ki a tartalomterületre, a számok felet használjon h2es címet (A generált számok:)
+
+-Létező generált tömb esetén a 2. (Ellenőriz) gomb is aktív lesz (valahogy jelezze grafikai megoldással)
+-Az ellenőriz gomb megnyomására hivjon meg egy függvényt amely megszámolja és kigyüjti a generált számok tömbjéből a primszámokat
+Függvény:
+	név: countPrimes
+	paraméter: - (a generált tömbbel kell 'dolgozzon')
+	visszatérés: objektum , szerkezete:
+	{
+		primes: tömb tipusu elem [a talált számok],
+		count: szám tipusu elem [a talált számok mennyisége],
+		datetime: [a számítás ideje Date elem],
+		found: boolean [ha akár 1 találat volt true, egyébként false]
+	}
+	
+- A primek ellenőrzésének eredményét írja a tartalom területre a kijelzett tömb után a következő feltételek mentén:
+		-ha találtunk akár 1 primet akkor a cim (h2): 'Találat!', és jelenjenek meg a talált értékek (primes)
+		-Ha nem találtunk primet akkor a cim(h2): 'Nincs találat!' és nincs más tartalom.
+		
+			
