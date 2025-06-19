@@ -77,7 +77,7 @@ export class MainPageComponent {
     console.log(nums);
 
     let titleHolder: HTMLElement = document.createElement("h2");
-    let title: Text = document.createTextNode("A generált számok:");
+    let title: Text = document.createTextNode("Generated Numbers:");
 
     titleHolder.appendChild(title);
 
@@ -91,7 +91,7 @@ export class MainPageComponent {
     console.log(primes);
 
     let titleHolder: HTMLElement = document.createElement("h2");
-    let title: Text = document.createTextNode(`${primes.found ? "Találat!" : "Nincs találat!"}`);
+    let title: Text = document.createTextNode(`${primes.found ? "Match found!" : "No match found!"}`);
     titleHolder.appendChild(title);
 
     this.primesHolder.appendChild(titleHolder);
