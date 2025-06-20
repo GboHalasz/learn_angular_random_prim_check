@@ -1,36 +1,38 @@
 <main class="container" aria-labelledby="page-title">
-    <div class="row text-center my-3">
-        <h1 id="page-title">Random Number Generator with Prime Number Validation</h1>
-        <div class="col12">
-            <button (click)="onGenerateClick()"
-                    type="button"
-                    class="btn btn-primary mx-3"
-                    aria-label="Generate 10 random numbers between 4 and 5000"
-            >
-              Generate Random Numbers
-            </button>
-            <button (click)="onCheckClick()" type="button" class="btn btn-primary mx-3"
-                    [disabled]="!isCheckEnabled"
-                    aria-label="Check how many of the generated numbers are prime numbers"
-            >
-              Check for Prime Numbers
-            </button>
-        </div>
+  <div class="row text-center my-3">
+    <h1 id="page-title">Random Number Generator with Prime Number Validation</h1>
+    <div class="col-6">
+      <button (click)="onGenerateClick()"
+              type="button"
+              class="btn btn-primary mx-3"
+              aria-label="Generate 10 random numbers between 4 and 5000"
+      >
+        Generate Random Numbers
+      </button>
     </div>
-    <div class="row">
-        <div class="col12 border border-primary p-3"
-             style="height: 200px;"
-             aria-live="polite"
-             aria-atomic="true"
-        >
-            <div *ngIf="generatedNums.length > 0" class="my-2">
-              <h2>Generated Numbers:</h2>
-              <p>{{ generatedNums.join(", ") }}</p>
-            </div>
-            <div *ngIf="primeResult"  class="my-3">
-              <h2>{{ primeResult.found ? "Match found!" : "No match found!" }}</h2>
-              <p *ngIf="primeResult.found">{{ primeResult.primes.join(", ") }}</p>
-            </div>
-        </div>
+    <div class="col-6">
+      <button (click)="onCheckClick()" type="button" class="btn btn-primary mx-3"
+              [disabled]="!isCheckEnabled"
+              aria-label="Check how many of the generated numbers are prime numbers"
+      >
+        Check for Prime Numbers
+      </button>
     </div>
+  </div>
+  <div class="row">
+    <div class="col12 border border-primary p-3"
+         style="height: 200px;"
+         aria-live="polite"
+         aria-atomic="true"
+    >
+      <div *ngIf="generatedNums.length > 0" class="my-2">
+        <h2>Generated Numbers:</h2>
+        <p>{{ generatedNums.join(", ") }}</p>
+      </div>
+      <div *ngIf="primeResult" class="my-3">
+        <h2>{{ primeResult.found ? "Match found!" : "No match found!" }}</h2>
+        <p *ngIf="primeResult.found">{{ primeResult.primes.join(", ") }}</p>
+      </div>
+    </div>
+  </div>
 </main>
