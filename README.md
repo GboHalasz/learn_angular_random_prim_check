@@ -21,7 +21,7 @@ This project is a simple Angular-based web application that generates random num
 
 ## 📷 Preview
 
-![Screenshot of the app UI](screenshot-placeholder.png) <!-- Replace with actual screenshot if available -->
+![Desktop view with Lighthouse audit](screenshots/new_desktop_view.png)
 
 ## 🚀 Getting Started
 
@@ -85,7 +85,7 @@ This project strengthened my understanding of:
 ## 📌 To-Do / Ideas for Improvement
 
 - Add unit tests for number generation and prime checking
-- Enhance UI with loading indicators and animations
+- Enhance the UI with loading indicators and animations
 - Allow users to specify the quantity or range
 - Display processing time for checking primes
 
