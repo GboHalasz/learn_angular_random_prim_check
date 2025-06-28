@@ -10,10 +10,9 @@ export class CountPrimes {
     this.primes = primes;
     this.count = primes.length;
     this.dateTime = new Date;
-    this.found = primes.length > 0 ? true : false;
+    this.found = primes.length > 0;
   }
 }
-
 
 @Component({
     selector: 'app-main-page',
@@ -23,35 +22,33 @@ export class CountPrimes {
 })
 export class MainPageComponent {
   generatedNums: number[] = [];
-  genNumsHolder: any;
-  primesHolder: any;
-
-  ngOnInit() {
-    this.primesHolder = document.getElementById("dispPrimes");
-    this.genNumsHolder = document.getElementById("dispGenNums");
-  }
+  primeResult: CountPrimes | null = null;
+  isCheckEnabled: boolean = false;
 
   onGenerateClick() {
-    this.removeHTMLcontent(this.primesHolder)
-    this.removeHTMLcontent(this.genNumsHolder)
-    this.generateNumbers(10)
-    this.displayGeneratedNumbers(this.generatedNums);
-    this.enableCheckBtn();
+    this.generatedNums = this.generateNumbers(10)
+    this.primeResult = null;
+    this.isCheckEnabled = true;
   }
 
   onCheckClick() {
-    this.displayPrimes(this.countPrimes());
-    this.disableCheckBtn()
+    this.primeResult = this.countPrimes();
+    this.isCheckEnabled = false;
   }
 
-  generateNumbers(quantity: number): void {
-    this.generatedNums = [];
-    while (this.generatedNums.length < quantity) {
-      const randInt: number = Math.floor((Math.random() * 17) + 4);
-      if (!this.generatedNums.includes(randInt)) {
-        this.generatedNums.push(randInt);
+  private generateNumbers(quantity: number): number[] {
+    const result: number[] = [];
+    while (result.length < quantity) {
+      const randInt: number = this.getRandomInt(4, 5000)
+      if (!result.includes(randInt)) {
+        result.push(randInt);
       }
     }
+    return result;
+  }
+
+  private getRandomInt(min: number, max: number): number {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
   isPrime(numb: number): boolean {
@@ -67,54 +64,8 @@ export class MainPageComponent {
     return true;
   }
 
-  countPrimes(): any {
-    const primNums: number[] = this.generatedNums.filter((num) => this.isPrime(num))
-
-    return new CountPrimes(primNums);;
-  }
-
-  private displayGeneratedNumbers(nums: number[]) {
-    console.log(nums);
-
-    let titleHolder: HTMLElement = document.createElement("h2");
-    let title: Text = document.createTextNode("A generált számok:");
-
-    titleHolder.appendChild(title);
-
-    let numsinHTML: Text = document.createTextNode(nums.join(", "))
-
-    this.genNumsHolder?.appendChild(titleHolder);
-    this.genNumsHolder?.appendChild(numsinHTML);
-  }
-
-  private displayPrimes(primes: CountPrimes) {
-    console.log(primes);
-
-    let titleHolder: HTMLElement = document.createElement("h2");
-    let title: Text = document.createTextNode(`${primes.found ? "Találat!" : "Nincs találat!"}`);
-    titleHolder.appendChild(title);
-
-    this.primesHolder.appendChild(titleHolder);
-
-    if (primes.found) {
-      let numsinHTML: Text = document.createTextNode(primes.primes.join(", "))
-      this.primesHolder.appendChild(numsinHTML);
-    }
-  }
-
-  private enableCheckBtn() {
-    const checkBtn = document.getElementById("checkBtn");
-    checkBtn?.classList.remove("disabled");
-  }
-
-  private disableCheckBtn() {
-    const checkBtn = document.getElementById("checkBtn")
-    checkBtn?.classList.add("disabled");
-  }
-
-  private removeHTMLcontent(holder: any) {
-    while (holder.firstChild) {
-      holder.removeChild(holder.firstChild)
-    }
+  countPrimes(): CountPrimes {
+    const primes = this.generatedNums.filter((num) => this.isPrime(num))
+    return new CountPrimes(primes);
   }
 }
